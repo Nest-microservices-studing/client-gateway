@@ -1,7 +1,7 @@
 import { Controller, Get, Param, Post, Delete, Patch, Body, Inject, Query, BadRequestException, ParseIntPipe } from '@nestjs/common';
 import { ClientProxy, RpcException } from '@nestjs/microservices';
 import { catchError, firstValueFrom } from 'rxjs';
-import { PRODUCT_SERVICE } from 'src/config';
+import { NATS_SERVICE } from 'src/config';
 import { PaginationDto } from 'src/common';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
@@ -9,7 +9,7 @@ import { UpdateProductDto } from './dto/update-product.dto';
 @Controller('products')
 export class ProductsController {
   constructor(
-    @Inject(PRODUCT_SERVICE) private readonly productsClient: ClientProxy
+    @Inject(NATS_SERVICE) private readonly productsClient: ClientProxy
   ) {}
 
   @Post()
