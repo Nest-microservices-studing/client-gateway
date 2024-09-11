@@ -1,14 +1,13 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Inject, ParseUUIDPipe, Query } from '@nestjs/common';
-import { ORDER_SERVICE } from 'src/config';
+import { NATS_SERVICE } from 'src/config';
 import { ClientProxy, RpcException } from '@nestjs/microservices';
 import { CreateOrderDto, OrderPaginationDto, StatusDto } from './dto';
 import { firstValueFrom } from 'rxjs';
 import { PaginationDto } from 'src/common';
-import { OrderStatus } from './enum/order.enum';
 
 @Controller('orders')
 export class OrdersController {
-  constructor(@Inject(ORDER_SERVICE) private readonly ordersClient: ClientProxy ) {}
+  constructor(@Inject(NATS_SERVICE) private readonly ordersClient: ClientProxy ) {}
 
   @Post()
   createOrder(@Body() createOrderDto: CreateOrderDto) {
